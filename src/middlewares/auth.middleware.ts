@@ -1,33 +1,20 @@
 import { NextFunction, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
 import HttpException from '../exceptions/HttpException';
-import { DataStoredInToken, RequestWithUser } from '../interfaces/auth.interface';
+import { RequestWithUser } from '../interfaces/auth.interface';
 
 async function authMiddleware(req: RequestWithUser, res: Response, next: NextFunction) {
   const headers = req.headers;
 
-  if (headers && headers.authorization) {
-    const secret: string = process.env.JWT_SECRET;
+  if (headers && headers.secret_key) {
+    const apiKey: string = process.env.API_KEY;
+    const secret: string = headers.secret_key;
 
-    try {
-      const token = headers.authorization.split(' ')[1];
-      const verificationResponse = jwt.verify(token, secret) as DataStoredInToken;
-      const userId = verificationResponse.id;
-   
-
-      // if (user) {
-      //   req.authorization = {
-      //     user
-      //   };
-      //   next();
-      // } else {
-      //   next(new HttpException(401, 'Unauthorized'));
-      // }
-    } catch (error) {
-      next(new HttpException(401, 'Unauthorized', error));
+    if (apiKey !== secret) {
+      next(new HttpException(401, 'Invalid secret key'));
     }
+    next();
   } else {
-    next(new HttpException(404, 'Authentication token missing'));
+    next(new HttpException(401, 'Unauthorized: Missing secret_key'));
   }
 }
 

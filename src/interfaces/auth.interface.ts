@@ -16,5 +16,5 @@ export interface Authorization {
 
 export interface RequestWithUser extends Request {
   authorization: Authorization;
-  headers: IncomingHttpHeaders;
+  headers: any;
 }

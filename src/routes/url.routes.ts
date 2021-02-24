@@ -16,10 +16,10 @@ class URLRoute implements Route {
 
   private initializeRoutes() {
     // shoten urk
-    this.router.post(`${this.path}`, validationMiddleware(CreateURLDto), this.urlController.createShortKey);
+    this.router.post(`${this.path}`, authMiddleware, validationMiddleware(CreateURLDto), this.urlController.createShortKey);
 
     // delete url
-    this.router.delete(`${this.path}/:id`, this.urlController.deleteShortKey);
+    this.router.delete(`${this.path}/:id`, authMiddleware, this.urlController.deleteShortKey);
 
     // get url by shorukey
     this.router.get(`/:id`, this.urlController.redirectToLongUrl);

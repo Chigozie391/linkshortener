@@ -1,6 +1,10 @@
 {
   "name": "linkshortner",
   "version": "0.0.0",
+  "repository": "https://github.com/Chigozie391/linkshortner",
+  "license": "MIT",
+  "main": "dist/server.js",
+  "keywords": [],
   "scripts": {
     "start": "node dist/server.js",
     "start:dev": "cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
