@@ -4,6 +4,7 @@
     "target": "es6",
     "outDir": "./dist",
     "baseUrl": "./src",
+    "module": "commonjs",
     "alwaysStrict": true,
     "noImplicitAny": true,
     "experimentalDecorators": true,
