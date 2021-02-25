@@ -25,6 +25,7 @@ jobs:
           echo PORT=${{ secrets.PORT }} >> .test.env
           echo NODE_ENV=${{ secrets.NODE_ENV }} >> .test.env
           echo API_KEY=${{ secrets.API_KEY }} >> .test.env
+          cat .test.env
       - name: Build and Test
         uses: actions/setup-node@v2
         with:
