@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 
-CMD ["sh", "-c", "npm install --only=prod"]
+RUN npm install --only=prod
 
 COPY . .
 
