@@ -9,7 +9,8 @@
     "start": "node dist/server.js",
     "start:dev": "cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts",
-    "test": "jest --setupFiles dotenv/config --forceExit --detectOpenHandles --coverage",
+    "test": "jest --forceExit --detectOpenHandles --coverage",
+    "test:local": "jest --setupFiles dotenv/config --forceExit --detectOpenHandles --coverage",
     "test:watch": "jest --setupFiles dotenv/config --watch --detectOpenHandles",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "build": "tsc -p ./"
