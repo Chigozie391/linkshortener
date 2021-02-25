@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Create .test.env file
+      - name: Seed .test.env
         run: |
-          touch .test.env
           echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .test.env
           echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .test.env
           echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> .test.env
