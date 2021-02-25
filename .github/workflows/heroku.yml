@@ -1,24 +1,18 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Push to heroku
-run: |
-  echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .test.env
-  echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .test.env
-  echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> .test.env
-  echo MYSQL_QUERY_LOGS=${{ secrets.MYSQL_QUERY_LOGS }} >> .test.env
-  echo HOST=${{ secrets.HOST }} >> .test.env
-  echo DOMAIN=${{ secrets.DOMAIN }} >> .test.env
-  echo PORT=${{ secrets.PORT }} >> .test.env
-  echo NODE_ENV=${{ secrets.NODE_ENV }} >> .test.env
-  echo API_KEY=${{ secrets.API_KEY }} >> .test.env
-  cat .test.env
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [master]
-
+env:
+  MYSQL_USER: ${{ secrets.MYSQL_USER }}
+  MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+  MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+  MYSQL_QUERY_LOGS: ${{ secrets.MYSQL_QUERY_LOGS }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  HOST: ${{ secrets.HOST }}
+  DOMAIN: ${{ secrets.DOMAIN }}
+  PORT: ${{ secrets.PORT }}
+  NODE_ENV: ${{ secrets.NODE_ENV }}
+  API_KEY: ${{ secrets.API_KEY }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,6 +24,17 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm test
+        env:
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_QUERY_LOGS: ${{ secrets.MYSQL_QUERY_LOGS }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          HOST: ${{ secrets.HOST }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          PORT: ${{ secrets.PORT }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          API_KEY: ${{ secrets.API_KEY }}
       - run: npm run build
       - name: Login to Heroku Container registry
         env:
