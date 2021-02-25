@@ -9,7 +9,6 @@ env:
   MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
   MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
   MYSQL_QUERY_LOGS: ${{ secrets.MYSQL_QUERY_LOGS }}
-  JWT_SECRET: ${{ secrets.JWT_SECRET }}
   HOST: ${{ secrets.HOST }}
   DOMAIN: ${{ secrets.DOMAIN }}
   PORT: ${{ secrets.PORT }}
@@ -26,17 +25,6 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm test
-        env:
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-          MYSQL_QUERY_LOGS: ${{ secrets.MYSQL_QUERY_LOGS }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          HOST: ${{ secrets.HOST }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-          PORT: ${{ secrets.PORT }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          API_KEY: ${{ secrets.API_KEY }}
       - run: npm run build
       - name: Login to Heroku Container registry
         env:
