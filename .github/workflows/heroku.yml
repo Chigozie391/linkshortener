@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 12.x
+      - run: npm install
+      - run: npm test
         env:
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
@@ -28,8 +30,6 @@ jobs:
           PORT: ${{ secrets.PORT }}
           NODE_ENV: ${{ secrets.NODE_ENV }}
           API_KEY: ${{ secrets.API_KEY }}
-      - run: npm install
-      - run: npm test
       - run: npm run build
       - name: Login to Heroku Container registry
         env:
