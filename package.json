@@ -17,16 +17,6 @@
   "engines": {
     "node": "12.16.3"
   },
-  "jest": {
-    "setupFiles": [
-      "dotenv/config"
-    ],
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
-  },
   "dependencies": {
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
