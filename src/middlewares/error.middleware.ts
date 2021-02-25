@@ -9,7 +9,7 @@ function errorMiddleware(error: HttpException, req: Request, res: Response, next
     message = 'Bad request';
   }
 
-  console.error('[ERROR] ', status, message, error.stack || '');
+  console.log('[ERROR] ', status, message, error.stack || '');
 
   res.status(status).json({ message });
 }

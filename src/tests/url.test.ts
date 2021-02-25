@@ -15,6 +15,15 @@ afterAll(async () => {
 });
 
 describe('Link Shortner tests', () => {
+  it('Should return 404 for undefine routes', async () => {
+    const indexRoute = new URLRoute();
+    const app = new App([indexRoute]);
+
+    const res = await request(app.getServer()).get(`/undefinedroutes/undefined`);
+    expect(res.status).toEqual(404);
+    expect(res.body).toHaveProperty('message');
+  });
+
   it('Should return 200 OK status for homepage', () => {
     const indexRoute = new URLRoute();
     const app = new App([indexRoute]);
