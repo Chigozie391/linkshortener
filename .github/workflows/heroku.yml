@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Create .env file
         run: |
-          touch .env
+          touch .env.test
           echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .env
           echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
           echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> .env
