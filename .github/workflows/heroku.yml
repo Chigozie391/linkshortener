@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Push to heroku
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and Test
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Login to Heroku Container registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Push to heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a radiant-inlet-71679 web
+      - name: Creating Release
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a radiant-inlet-71679 web
