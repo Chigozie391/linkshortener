@@ -1,4 +1,4 @@
-# Link Shortener API
+# [Link Shortener API](https://iqx.herokuapp.com/api/v1/docs/)
 
 This is a simple link shortener API that takes a long URL and returns the equivalent short URL
 
@@ -16,7 +16,7 @@ npm install
 MYSQL_USER=root
 MYSQL_PASSWORD=root
 MYSQL_PATH=localhost
-MYSQL_DATABASE=shortner
+MYSQL_DATABASE=shortener
 HOST=http://localhost/
 DOMAIN=localhost
 PORT=80

@@ -14,7 +14,7 @@ afterAll(async () => {
   await URL.destroy({ where: { originalUrl: data.originalUrl }, force: true });
 });
 
-describe('Link Shortner tests', () => {
+describe('Link Shortener tests', () => {
   it('Should return 404 for undefine routes', async () => {
     const indexRoute = new URLRoute();
     const app = new App([indexRoute]);

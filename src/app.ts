@@ -72,8 +72,8 @@ class App {
         openapi: '3.0.0',
         host: process.env.HOST,
         info: {
-          title: 'Link Shortner',
-          description: 'Link Shortner API',
+          title: 'Link Shortener',
+          description: 'Link Shortener API',
           version: '1.0.0',
           contact: {
             name: 'Chigozie Madubuko',
