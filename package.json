@@ -1,7 +1,7 @@
 {
   "name": "linkshortener",
   "version": "0.0.0",
-  "repository": "https://github.com/Chigozie391/linkshortner",
+  "repository": "https://github.com/Chigozie391/linkshortener",
   "license": "MIT",
   "main": "dist/server.js",
   "keywords": [],
