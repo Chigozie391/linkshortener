@@ -6,11 +6,6 @@ import { createHash } from 'crypto';
 class URLService {
   public url = urlModel;
 
-  public async getAllURL(): Promise<URLAttributes[]> {
-    const urls: URLAttributes[] = await this.url.findAll({ where: { deletedFlag: false } });
-    return urls;
-  }
-
   public async getURLByShortKey(shortKey: string): Promise<string> {
     const url: URLAttributes = await this.url.findOne({ where: { shortKey }, attributes: ['originalUrl'] });
     if (!url) return '/';
@@ -35,20 +30,24 @@ class URLService {
 
   public async deleteShortKey(shortKey: string): Promise<[number, URLAttributes[]]> {
     const deletedKey = await this.url.findOne({ where: { shortKey, deletedFlag: true }, paranoid: false });
-    if (deletedKey) throw new HttpException(409, 'Short key does not exist');
+    if (deletedKey) throw new HttpException(400, 'Short key does not exist');
 
     const deleteUser = await this.url.update({ deletedFlag: true, deletedAt: new Date() }, { where: { shortKey } });
-    if (!deleteUser) throw new HttpException(409, 'SHort key does not exist');
+    if (!deleteUser) throw new HttpException(400, 'SHort key does not exist');
 
     return deleteUser;
   }
 
   private hash(longUrl: string, length: number = 4): string {
-    const start = Math.random() * 10;
     const sha = createHash('sha256');
     sha.update(longUrl);
 
-    return sha.digest('base64').replace('/', '+').substr(parseInt(start.toFixed()), length);
+    const chars = sha.digest('base64').replace('/', '+');
+    let result = '';
+    for (let i = length; i > 0; --i) {
+      result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
   }
 }
 

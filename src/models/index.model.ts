@@ -14,7 +14,8 @@ export const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.M
     max: 30,
     idle: 10000,
     acquire: 30000
-  }
+  },
+  logging: false
 });
 
 sequelize.addModels([URL]);
