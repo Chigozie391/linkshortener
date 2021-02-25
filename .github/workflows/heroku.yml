@@ -13,18 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Create .env.test file
+      - name: Create .test.env file
         run: |
-          touch .env.test
-          echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .env.test
-          echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env.test
-          echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> .env.test
-          echo MYSQL_QUERY_LOGS=${{ secrets.MYSQL_QUERY_LOGS }} >> .env.test
-          echo HOST=${{ secrets.HOST }} >> .env.test
-          echo DOMAIN=${{ secrets.DOMAIN }} >> .env.test
-          echo PORT=${{ secrets.PORT }} >> .env.test
-          echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env.test
-          echo API_KEY=${{ secrets.API_KEY }} >> .env.test
+          touch .test.env
+          echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .test.env
+          echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .test.env
+          echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> .test.env
+          echo MYSQL_QUERY_LOGS=${{ secrets.MYSQL_QUERY_LOGS }} >> .test.env
+          echo HOST=${{ secrets.HOST }} >> .test.env
+          echo DOMAIN=${{ secrets.DOMAIN }} >> .test.env
+          echo PORT=${{ secrets.PORT }} >> .test.env
+          echo NODE_ENV=${{ secrets.NODE_ENV }} >> .test.env
+          echo API_KEY=${{ secrets.API_KEY }} >> .test.env
       - name: Build and Test
         uses: actions/setup-node@v2
         with:
