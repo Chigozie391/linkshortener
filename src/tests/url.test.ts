@@ -15,7 +15,6 @@ afterAll(async () => {
 });
 
 describe('Link Shortner tests', () => {
-  console.log(process.env.MYSQL_PATH);
   it('Should return 404 for undefine routes', async () => {
     const indexRoute = new URLRoute();
     const app = new App([indexRoute]);
@@ -68,7 +67,7 @@ describe('Link Shortner tests', () => {
     const app = new App([indexRoute]);
 
     const res = await request(app.getServer()).post(`${indexRoute.path}`).send(data).set('secret_key', process.env.API_KEY);
-    shortKey = res.body.data.url.split('http://localhost/')[1];
+    shortKey = res.body.data.url.split(process.env.HOST)[1];
 
     expect(res.status).toEqual(201);
     expect(res.body).toHaveProperty('data.url');
