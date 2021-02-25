@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Create .env file
+        run: |
+          touch .env
+          echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .env
+          echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
+          echo MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} >> .env
+          echo MYSQL_QUERY_LOGS=${{ secrets.MYSQL_QUERY_LOGS }} >> .env
+          echo HOST=${{ secrets.HOST }} >> .env
+          echo DOMAIN=${{ secrets.DOMAIN }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env
+          echo API_KEY=${{ secrets.API_KEY }} >> .env
       - name: Build and Test
         uses: actions/setup-node@v2
         with:
           node-version: 12.x
       - run: npm install
       - run: npm test
-        env:
-          CI: true
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-          MYSQL_QUERY_LOGS: ${{ secrets.MYSQL_QUERY_LOGS }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          HOST: ${{ secrets.HOST }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-          PORT: ${{ secrets.PORT }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          API_KEY: ${{ secrets.API_KEY }}
       - run: npm run build
       - name: Login to Heroku Container registry
         env:
