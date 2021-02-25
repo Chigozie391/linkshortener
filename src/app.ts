@@ -1,8 +1,10 @@
 import * as cors from 'cors';
 import * as express from 'express';
-import * as  helmet from 'helmet';
+import * as helmet from 'helmet';
 import * as hpp from 'hpp';
 import * as logger from 'morgan';
+import * as swaggerJsDocs from 'swagger-jsdoc';
+import * as swaggerUI from 'swagger-ui-express';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { sequelize } from './models/index.model';
@@ -48,6 +50,9 @@ class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
+    const swaggerDocs = swaggerJsDocs(this.getSwaggerOptions());
+    this.app.use('/api/v1/docs', swaggerUI.serve);
+    this.app.get('/api/v1/docs', swaggerUI.setup(swaggerDocs));
     routes.forEach(route => {
       this.app.use('/', route.router);
     });
@@ -59,6 +64,25 @@ class App {
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  private getSwaggerOptions(): swaggerJsDocs.Options {
+    return {
+      swaggerDefinition: {
+        openapi: '3.0.0',
+        host: process.env.HOST,
+        info: {
+          title: 'Link Shortner',
+          description: 'Link Shortner API',
+          version: '1.0.0',
+          contact: {
+            name: 'Chigozie Madubuko',
+            email: 'chigoziemadubuko@gmail.com'
+          }
+        }
+      },
+      apis: ['./documentation.yaml']
+    };
   }
 }
 

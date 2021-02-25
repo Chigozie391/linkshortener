@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Link Shortener
+  description: Link Shortener API.
+  version: 1.0.0
+  contact:
+    name: Chigozie Madubuko
+    email: chigoziemadubuko@gmail.com
+
+servers:
+  - url: http://localhost:{port}
+    description: Local Server
+    variables:
+      port:
+        enum:
+          - "80"
+          - "5000"
+        default: 80
+
+paths:
+  /api/v1/url:
+    post:
+      description: Shorten url
+      tags:
+        - Shorten URL
+      parameters:
+        - name: secret_key
+          in: header
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/URL"
+      responses:
+        "200":
+          description: Successful
+        "400":
+          description: Bad Request
+        "500":
+          description: An error occurred while trying to shorten, please try again.
+
+  /api/v1/url/{id}:
+    delete:
+      description: Deletes a short url
+      tags:
+        - Delete Short URL
+      parameters:
+        - name: secret_key
+          in: header
+          schema:
+            type: string
+          required: true
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Successful
+        "400":
+          description: Bad Request
+        "500":
+          description: An error occurred while trying to delete url, please try again.
+
+components:
+  schemas:
+    URL:
+      type: object
+      properties:
+        originalUrl:
+          type: string
+          example: "https://www.examplesofgreatposts.com/2021/02/the--greate-and-ever-changing-effect-of-covid-in-todays-educational-system-in-nigeria-taiwo-chinedu-yusuf"
+      required:
+        - originalUrl
