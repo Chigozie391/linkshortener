@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build and Test
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
         env:
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
@@ -25,9 +28,6 @@ jobs:
           PORT: ${{ secrets.PORT }}
           NODE_ENV: ${{ secrets.NODE_ENV }}
           API_KEY: ${{ secrets.API_KEY }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: 12.x
       - run: npm install
       - run: npm test
       - run: npm run build
