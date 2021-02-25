@@ -15,6 +15,7 @@ afterAll(async () => {
 });
 
 describe('Link Shortner tests', () => {
+  console.log(process.env.MYSQL_PATH);
   it('Should return 404 for undefine routes', async () => {
     const indexRoute = new URLRoute();
     const app = new App([indexRoute]);
