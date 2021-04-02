@@ -33,8 +33,8 @@ jobs:
       - name: Push to heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push -a radiant-inlet-71679 web
+        run: heroku container:push -a iqx web
       - name: Creating Release
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release -a radiant-inlet-71679 web
+        run: heroku container:release -a iqx web
