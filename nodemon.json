@@ -1,4 +1,7 @@
 {
   "verbose": true,
+  "execMap": {
+    "js": "node -r sucrase/register"
+  },
   "ignore": ["node_modules", ".git", "*.log", "dist", "src/migrations", "src/tests", "coverage"]
 }
